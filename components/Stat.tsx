@@ -1,0 +1,1 @@
+export function Stat({label,value,detail}:{label:string;value:string;detail?:string}){return <div className="stat"><div className="statValue">{value}</div><div className="statLabel">{label}</div>{detail&&<div className="statDetail">{detail}</div>}</div>}
