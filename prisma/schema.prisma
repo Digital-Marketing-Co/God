@@ -1,0 +1,8 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+enum SystemClass { RELIGIOUS NONRELIGIOUS }
+enum ResearchStatus { VERIFIED_PRIMARY VERIFIED_OFFICIAL VERIFIED_SCHOLARLY PROVISIONAL DISPUTED NEEDS_REVIEW }
+model DatasetEdition { id String @id @default(cuid()) name String @unique importedAt DateTime @default(now()) morals Moral[] systems EthicalSystem[] evidence EvidenceMapping[] }
+model Moral { id String @id @default(cuid()) sourceId String canonicalSlug String @unique title String definition String category String sourceRank Int? editionId String edition DatasetEdition @relation(fields:[editionId],references:[id]) evidence EvidenceMapping[] @@unique([editionId,sourceId]) @@index([category]) }
+model EthicalSystem { id String @id @default(cuid()) name String canonicalSlug String @unique family String class SystemClass sourceBasis String? sourceUrl String? editionId String edition DatasetEdition @relation(fields:[editionId],references:[id]) evidence EvidenceMapping[] @@unique([editionId,name]) @@index([class,family]) }
+model EvidenceMapping { id String @id @default(cuid()) editionId String moralId String systemId String anchor String? sourceUrl String? status ResearchStatus @default(NEEDS_REVIEW) caution String? edition DatasetEdition @relation(fields:[editionId],references:[id]) moral Moral @relation(fields:[moralId],references:[id]) system EthicalSystem @relation(fields:[systemId],references:[id]) @@unique([editionId,moralId,systemId,sourceUrl]) @@index([moralId,status]) @@index([systemId,status]) }
