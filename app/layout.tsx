@@ -1,0 +1,3 @@
+import type {Metadata} from "next";import "./globals.css";import {Nav} from "@/components/Nav";
+export const metadata:Metadata={title:{default:"World Morals 2629",template:"%s | World Morals"},description:"An evidence-first interactive atlas of 610 moral teachings across 94 represented religious and nonreligious ethical systems."};
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body><Nav/><main>{children}</main><footer className="footer container">World Morals · Universal Moral Code Statistical Atlas Edition XXI · Corpus statistics describe represented evidence, not moral superiority.</footer></body></html>}
