@@ -1,0 +1,2 @@
+import Link from "next/link";
+export function Nav(){return <header className="nav"><Link href="/" className="brand">WORLD MORALS <span>2629</span></Link><nav aria-label="Primary"><Link href="/morals">Morals</Link><Link href="/systems">Systems</Link><Link href="/matrix">Matrix</Link><Link href="/compare">Compare</Link><Link href="/methodology">Methodology</Link></nav></header>}
